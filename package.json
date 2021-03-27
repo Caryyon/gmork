@@ -1,0 +1,11 @@
+{
+  "name": "gmork",
+  "version": "0.0.2",
+  "description": "cli tool to run them all.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cary Wolff",
+  "license": "ISC"
+}
