@@ -11,10 +11,10 @@ import { cosmiconfig } from "cosmiconfig"
 const cli = meow(
   `
   Usage:
-    $ gmork         summons gmork to your service
+    $ gmork         summons The Gmork to your side
     $ gmork init    will ask for config settings(~/.gmorkrc)
+    $ gmork git         summons list of github projects and take you to url
   Options:
-    --git         summons list of github projects and take you to url
 `
 )
 
@@ -62,7 +62,7 @@ async function main({ input, flags, pkg: { name } }) {
       console.log(err)
     }
   }
-  if (flags.git) {
+  if (input[0] === "git") {
     const explorer = cosmiconfig(name)
     const { config } = await explorer.load(`${os.homedir()}/.gmorkrc`)
     const octokit = new Octokit({
