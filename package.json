@@ -1,7 +1,7 @@
 {
   "name": "gmork",
-  "version": "0.0.5",
-  "description": "personal cli tool for Cary Wolff",
+  "version": "0.0.6",
+  "description": "A cli tool to make things easier",
   "bin": {
     "gmork": "gmork.js"
   },

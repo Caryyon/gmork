@@ -6,22 +6,22 @@ import open from "open"
 import execa from "execa"
 import inquirer from "inquirer"
 import { Octokit } from "@octokit/core"
-import { cosmiconfig, cosmiconfigSync } from "cosmiconfig"
+import { cosmiconfig } from "cosmiconfig"
 
 const cli = meow(
   `
   Usage:
     $ gmork         summons gmork to your service
-    $ gmork init    will ask for config settings
+    $ gmork init    will ask for config settings(~/.gmorkrc)
   Options:
     --git         summons list of github projects and take you to url
 `
 )
 
-//console.log(cli)
+console.log(cli)
 async function main({ input, flags, pkg: { name } }) {
   try {
-    if (!input[0] && flags == null) {
+    if (input.length === 0 && flags.length === 0) {
       console.log("I am, The Gmork!")
       const answer = await inquirer.prompt([
         {
@@ -40,18 +40,22 @@ async function main({ input, flags, pkg: { name } }) {
     console.error(err)
   }
   if (input[0] === "init") {
-    const answer = await inquirer.prompt([
-      {
-        type: "input",
-        name: "init",
-        message: "What is your github private key?",
-      },
-    ])
-    if (answer.init !== "") {
-      fs.writeFile(
-        `${os.homedir()}/.gmorkrc`,
-        JSON.stringify({ gitkey: answer.init })
-      )
+    try {
+      const answer = await inquirer.prompt([
+        {
+          type: "input",
+          name: "init",
+          message: "What is your github private key?",
+        },
+      ])
+      if (answer.init !== "") {
+        fs.writeFile(
+          `${os.homedir()}/.gmorkrc`,
+          JSON.stringify({ gitkey: answer.init })
+        )
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
   if (flags.git) {
@@ -61,9 +65,7 @@ async function main({ input, flags, pkg: { name } }) {
       auth: config.gitkey,
     })
     const { data } = await octokit.request("/users/Caryyon/repos")
-    //console.log(data)
     const repos = data.map((item) => item.full_name)
-    //console.log(repos)
     try {
       const answer = await inquirer.prompt([
         {
