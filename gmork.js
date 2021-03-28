@@ -18,7 +18,7 @@ const cli = meow(
 `
 )
 
-console.log(cli)
+//console.log(cli)
 async function main({ input, flags, pkg: { name } }) {
   try {
     if (input.length === 0 && flags.length === 0) {
@@ -41,6 +41,10 @@ async function main({ input, flags, pkg: { name } }) {
   }
   if (input[0] === "init") {
     try {
+      console.log(`
+      If you need a github personal access token,
+      follow the instructions here: https://tinyurl.com/aczjurff
+      `)
       const answer = await inquirer.prompt([
         {
           type: "input",
