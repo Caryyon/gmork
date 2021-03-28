@@ -12,8 +12,9 @@ const cli = meow(
   `
   Usage:
     $ gmork         summons gmork to your service
+    $ gmork init    will ask for config settings
   Options:
-    $ --git         starts github flow
+    --git         summons list of github projects and take you to url
 `
 )
 
