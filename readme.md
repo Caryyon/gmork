@@ -13,6 +13,9 @@ As this grows it may become something more and stabalize, but for now it is just
 
 ### Goals
 
+- [x] stay focused
 - [x] setup env to build and bundle a cli tool
 - [ ] carve out a way to make the architecture plugin based
-- [x] stay focused
+- [ ] smoothly run other cli tools
+- [ ] catch those errors gracefully
+- [ ] link to the docs or issues on failures/errors

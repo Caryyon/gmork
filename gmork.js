@@ -11,10 +11,13 @@ import { cosmiconfig } from "cosmiconfig"
 const cli = meow(
   `
   Usage:
-    $ gmork         summons The Gmork to your side
-    $ gmork init    will ask for config settings(~/.gmorkrc)
-    $ gmork git         summons list of github projects and take you to url
+    $ gmork             Summons The Gmork to your side
+    $ gmork init        Will walk you through setup (~/.gmorkrc)
+    $ gmork docs        Teleport you to The Gmork docs.
+    $ gmork git         Summons a list of your github projects
+                        and opens the selected project in a browser
   Options:
+    --
 `
 )
 
@@ -58,6 +61,13 @@ async function main({ input, flags, pkg: { name } }) {
           JSON.stringify({ gitkey: answer.init })
         )
       }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  if (input[0] === "docs") {
+    try {
+      await open(`https://github.com/Caryyon/gmork`)
     } catch (err) {
       console.log(err)
     }
