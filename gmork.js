@@ -51,14 +51,23 @@ async function main({ input, flags, pkg: { name } }) {
       const answer = await inquirer.prompt([
         {
           type: "input",
-          name: "init",
+          name: "username",
+          message: "What is your github username?",
+        },
+        {
+          type: "input",
+          name: "personalKey",
           message: "What is your github private key?",
         },
       ])
-      if (answer.init !== "") {
+      if (answer.personalKey !== "") {
         fs.writeFile(
           `${os.homedir()}/.gmorkrc`,
-          JSON.stringify({ gitkey: answer.init })
+          JSON.stringify({
+            username: answer.username,
+            gitkey: answer.personalKey,
+          }),
+          (err) => console.log(err)
         )
       }
     } catch (err) {
@@ -78,7 +87,7 @@ async function main({ input, flags, pkg: { name } }) {
     const octokit = new Octokit({
       auth: config.gitkey,
     })
-    const { data } = await octokit.request("/users/Caryyon/repos")
+    const { data } = await octokit.request(`/users/${config.username}/repos`)
     const repos = data.map((item) => item.full_name)
     try {
       const answer = await inquirer.prompt([

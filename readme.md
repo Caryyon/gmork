@@ -1,9 +1,8 @@
 <p align="center">
-  <img src="https://gifimage.net/wp-content/uploads/2017/11/gmork-gif-4.gif" alt="animated" />
+  <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2FYTA7xSbXQkWJO%2Fgiphy.gif" alt="animated" />
 </p>
 
 # Gmork
-
 This is a package I initially setup for the name. The Gmork is a fictional character from The Neverending Story books and movies.
 The Gmork is depicted as a huge black wolf with glowing green eyes. It helps "The Nothing" in destroying our dream world.
 
@@ -19,3 +18,8 @@ As this grows it may become something more and stabalize, but for now it is just
 - [ ] smoothly run other cli tools
 - [ ] catch those errors gracefully
 - [ ] link to the docs or issues on failures/errors
+
+
+### Plugin Architecture
+
+
