@@ -48,26 +48,28 @@ async function main({ input, flags, pkg: { name } }) {
       If you need a github personal access token,
       follow the instructions here: https://tinyurl.com/aczjurff
       `)
-      const answer = await inquirer.prompt([
+      const { githubUsername, githubPersonalKey } = await inquirer.prompt([
         {
           type: "input",
-          name: "username",
+          name: "githubUsername",
           message: "What is your github username?",
         },
         {
           type: "input",
-          name: "personalKey",
+          name: "githubPersonalKey",
           message: "What is your github private key?",
         },
       ])
-      if (answer.personalKey !== "") {
+      if (githubPersonalKey !== "") {
         fs.writeFile(
           `${os.homedir()}/.gmorkrc`,
           JSON.stringify({
-            username: answer.username,
-            gitkey: answer.personalKey,
+            githubUsername,
+            githubPersonalKey,
           }),
-          (err) => console.log(err)
+          (err) => {
+            if (err) console.log(err)
+          }
         )
       }
     } catch (err) {
@@ -85,9 +87,11 @@ async function main({ input, flags, pkg: { name } }) {
     const explorer = cosmiconfig(name)
     const { config } = await explorer.load(`${os.homedir()}/.gmorkrc`)
     const octokit = new Octokit({
-      auth: config.gitkey,
+      auth: config.githubPersonalKey,
     })
-    const { data } = await octokit.request(`/users/${config.username}/repos`)
+    const { data } = await octokit.request(
+      `/users/${config.githubUsername}/repos`
+    )
     const repos = data.map((item) => item.full_name)
     try {
       const answer = await inquirer.prompt([
