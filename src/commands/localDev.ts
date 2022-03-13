@@ -1,9 +1,7 @@
 import { cosmiconfig } from 'cosmiconfig';
 import os from 'os';
-import open from 'open';
-import inquirer from 'inquirer';
 
-export default (name) => async () => {
+export default (name: string) => async () => {
   try {
     const explorer = cosmiconfig(name);
     // get username from gmorkrc

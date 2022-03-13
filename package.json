@@ -3,13 +3,13 @@
   "version": "0.0.13",
   "description": "A cli tool to make things easier",
   "bin": {
-    "gmork": "gmork.js"
+    "gmork": "dist/index.js"
+  },
+  "scripts": {
+    "build": "swc src -d dist",
+    "dev": "npm run build && stmux -- [ 'node ./dist/index.js' ]"
   },
   "type": "module",
-  "scripts": {
-    "start": "stmux -- [ -t 'GMORK' 'node gmork.js' ]",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Cary Wolff",
   "license": "ISC",
   "dependencies": {
@@ -17,11 +17,14 @@
     "@octokit/request": "^5.4.14",
     "chalk": "^5.0.1",
     "cosmiconfig": "^7.0.0",
-    "execa": "^5.1.1",
     "inquirer": "^8.0.0",
     "meow": "^9.0.0",
     "open": "^8.0.4",
     "stmux": "^1.8.3",
     "window-size": "^1.1.1"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.154"
   }
 }

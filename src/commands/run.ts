@@ -1,4 +1,3 @@
-import execa from 'execa';
 import chalk from 'chalk';
 
 export default (command) => async () => {

@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 import open from 'open';
-import chalk from 'chalk';
 import { github, init, help, welcome, run } from './commands/index.js';
 
-async function main({ input, flags, pkg: { name } }) {
+interface MainTypes {
+  input?: string | string[];
+  flags?: string | string[];
+  pkg: {
+    name: string;
+  };
+}
+
+async function main({ input, flags, pkg: { name } }: MainTypes) {
   switch (input[0]) {
     case 'init':
       init();
       break;
     case 'bite':
-      spit(console.log(chalk.bold.red('Bite at the nearest thing')));
       break;
     case 'docs':
       async () => {
