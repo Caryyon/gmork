@@ -7,6 +7,7 @@
   },
   "type": "module",
   "scripts": {
+    "start": "stmux -- [ -t 'GMORK' 'node gmork.js' ]",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Cary Wolff",
@@ -14,11 +15,13 @@
   "dependencies": {
     "@octokit/core": "^3.3.1",
     "@octokit/request": "^5.4.14",
+    "chalk": "^5.0.1",
     "cosmiconfig": "^7.0.0",
-    "execa": "^5.0.0",
+    "execa": "^5.1.1",
     "inquirer": "^8.0.0",
     "meow": "^9.0.0",
     "open": "^8.0.4",
-    "stmux": "^1.8.1"
+    "stmux": "^1.8.3",
+    "window-size": "^1.1.1"
   }
 }

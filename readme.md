@@ -22,4 +22,6 @@ As this grows it may become something more and stabalize, but for now it is just
 
 ### Plugin Architecture
 
-
+Ideally I want a easily plug n play solution for adding new features.
+Something that will either wrap a function and then call it internally, or/and
+some way to map over a directory and instantiate all the files within by name
