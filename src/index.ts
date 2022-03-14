@@ -1,21 +1,16 @@
 #!/usr/bin/env node
 import open from 'open';
+import chalk from 'chalk';
+import type { Result, AnyFlags } from 'meow';
 import { github, init, help, welcome, run } from './commands/index.js';
 
-interface MainTypes {
-  input?: string | string[];
-  flags?: string | string[];
-  pkg: {
-    name: string;
-  };
-}
-
-async function main({ input, flags, pkg: { name } }: MainTypes) {
+async function main({ input, flags, pkg: { name } }: Result<AnyFlags>) {
   switch (input[0]) {
     case 'init':
       init();
       break;
     case 'bite':
+      console.log(chalk.bold.red('Leaps forward biting at your hands.'));
       break;
     case 'docs':
       async () => {
@@ -30,11 +25,10 @@ async function main({ input, flags, pkg: { name } }: MainTypes) {
       run(input);
       break;
     case 'git':
-      github();
+      github(name);
       break;
     default:
-      welcome(name);
+      welcome();
   }
 }
-
 main(help);

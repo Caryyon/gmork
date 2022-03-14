@@ -1,10 +1,10 @@
-import { cosmiconfig } from "cosmiconfig";
-import os from "os";
-import open from "open";
-import inquirer from "inquirer";
-import { Octokit } from "@octokit/core";
+import { cosmiconfig } from 'cosmiconfig';
+import os from 'os';
+import open from 'open';
+import inquirer from 'inquirer';
+import { Octokit } from '@octokit/core';
 
-export default (name) => async () => {
+export default async (name: string) => {
   try {
     const explorer = cosmiconfig(name);
     // get username from gmorkrc
@@ -18,13 +18,13 @@ export default (name) => async () => {
       `/users/${config.githubUsername}/repos`
     );
     // get names for repos
-    const repos = data.map((item) => item.full_name);
+    const repos = data.map((item: { full_name: string }) => item.full_name);
     // get which one they wanna open
     const answer = await inquirer.prompt([
       {
-        type: "list",
-        name: "githubRepoSlug",
-        message: "Which Repository?",
+        type: 'list',
+        name: 'githubRepoSlug',
+        message: 'Which Repository?',
         choices: repos,
       },
     ]);
@@ -34,13 +34,13 @@ export default (name) => async () => {
     if (err.isTtyError) {
       // Prompt couldn't be rendered in the current environment
       console.log("couldn't be rendered in the env");
-    } else if (err.code === "ENOENT") {
-      console.log("====================== GMORK SAYS ======================");
+    } else if (err.code === 'ENOENT') {
+      console.log('====================== GMORK SAYS ======================');
       console.log(`I couldn't find a config file at ${err.path}`);
       console.log(
         'I must be initialized with "gmork init" before I may do your bidding'
       );
-      console.log("========================================================");
+      console.log('========================================================');
     } else {
       // Something else went wrong
       console.error({ err });

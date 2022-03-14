@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
 
-export default async function welcome(name) {
+export default async function welcome() {
   try {
     console.log('I am, The Gmork!');
     const res = await inquirer.prompt([
@@ -8,13 +8,12 @@ export default async function welcome(name) {
         type: 'list',
         name: 'welcome',
         message: 'How May I serve you?',
-        choices: ['Tell me a joke', 'Leave me to my thoughts'],
-      },
-      {
-        type: 'list',
-        name: 'goodbye',
-        message: 'Is there anything else I can help you with?',
-        choices: ['Yes', 'Leave me to my thoughts'],
+        choices: [
+          'Take me to your lead... docs!',
+          'Setup a new project',
+          'Setup new gmork plugin',
+          'Leave me to my thoughts',
+        ],
       },
     ]);
     console.log(res);
